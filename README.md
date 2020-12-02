@@ -1,43 +1,55 @@
 ## users テーブル
 
-| Column     | Type    | Options      |
-| ---------- | ------  | -----------  |
-| name       | string  | null: false  |
-| email      | string  | unique: true |
-| password   | string  | null: false  |
-| real_name  | string  | null: false  |
-| frigana    | string  | null: false  |
-| Birthday   | integer | null: false  |
+| Column              | Type    | Options      |
+| ----------          | ------  | -----------  |
+| nickname            | string  | null: false  |
+| email               | string  | unique: true |
+| encrypted_password  | string  | null: false  |
+| last_name           | string  | null: false  |
+| first_name          | string  | null: false  |
+| last_name_frigana   | string  | null: false  |
+| first_name_frigana  | string  | null: false  |
+| birthday            | date    | null: false  |
+
+- has_many :items
+- has_many :purchase_records
 
 ## items テーブル
 
-| Column          | Type      | Options     |
-| ----------      | --------- | ----------- |
-| title           | string    | null: false |
-| image           |           | null: false |
-| explanation     | text      | null: false |
-| status          | string    | null: false |
-| delivery_charge | string    | null: false |
-| shipping_area   | string    | null: false |
-| duration        | integer   | null: false |
-| price           | integer   | null: false |
-| seller          | string    | null: false |
+| Column             | Type      | Options     |
+| ----------         | --------- | ----------- |
+| title              | string    | null: false |
+| explanation        | text      | null: false |
+| status_id          | integer   | null: false |
+| delivery_charge_id | integer   | null: false |
+| shipping_area_id   | integer   | null: false |
+| duration_id        | integer   | null: false |
+| price              | integer   | null: false |
+| user               | references | null: false, foreign_key: true |
 
-## Purchase_records テーブル
+- belongs_to :users
+- belongs_to :purchase_records
+
+## purchase_records テーブル
 
 | Column        | Type        | Options                        |
 | ----------    | ---------   | -----------                    |
-| buyer         | string      | null: false                    |
-| purchase_date | integer     | null: false                    |
-| title         | references  | null: false, foreign_key: true |
+| user          | references  | null: false, foreign_key: true |
+| item          | references  | null: false, foreign_key: true |
+
+- belongs_to :items
+- belongs_to :users
+- belongs_to :street_address
 
 ## street_address テーブル
 
 | Column         | Type      | Options     |
 | ----------     | --------- | ----------- |
 | postal_code    | string    | null: false |
-| prefectures    | string    | null: false |
+| prefectures_id | integer   | null: false |
 | municipality   | string    | null: false |
 | address        | string    | null: false |
-| building_name  | string    | null: false |
+| building_name  | string    |             |
 | phone_number   | integer   | null: false |
+
+- belongs_to :street_address
