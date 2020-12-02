@@ -16,19 +16,20 @@
 
 ## items テーブル
 
-| Column             | Type      | Options     |
-| ----------         | --------- | ----------- |
-| title              | string    | null: false |
-| explanation        | text      | null: false |
-| status_id          | integer   | null: false |
-| delivery_charge_id | integer   | null: false |
-| shipping_area_id   | integer   | null: false |
-| duration_id        | integer   | null: false |
-| price              | integer   | null: false |
+| Column             | Type       | Options     |
+| ----------         | ---------  | ----------- |
+| title              | string     | null: false |
+| explanation        | text       | null: false |
+| category_id        | integer    | null: false |
+| status_id          | integer    | null: false |
+| delivery_charge_id | integer    | null: false |
+| shipping_area_id   | integer    | null: false |
+| duration_id        | integer    | null: false |
+| price              | integer    | null: false |
 | user               | references | null: false, foreign_key: true |
 
 - belongs_to :users
-- belongs_to :purchase_records
+- has_one :purchase_records
 
 ## purchase_records テーブル
 
@@ -39,17 +40,18 @@
 
 - belongs_to :items
 - belongs_to :users
-- belongs_to :street_address
+- has_one :street_address
 
 ## street_address テーブル
 
-| Column         | Type      | Options     |
-| ----------     | --------- | ----------- |
-| postal_code    | string    | null: false |
-| prefectures_id | integer   | null: false |
-| municipality   | string    | null: false |
-| address        | string    | null: false |
-| building_name  | string    |             |
-| phone_number   | integer   | null: false |
+| Column          | Type       | Options     |
+| ----------      | ---------  | ----------- |
+| postal_code     | string     | null: false |
+| prefectures_id  | integer    | null: false |
+| municipality    | string     | null: false |
+| address         | string     | null: false |
+| building_name   | string     |             |
+| phone_number    | integer    | null: false |
+| purchase_record | references | null: false, foreign_key: true |
 
 - belongs_to :street_address
