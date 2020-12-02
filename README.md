@@ -54,4 +54,4 @@
 | phone_number    | integer    | null: false |
 | purchase_record | references | null: false, foreign_key: true |
 
-- belongs_to :street_address
+- belongs_to :purchase_record
