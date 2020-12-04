@@ -86,7 +86,7 @@ describe User do
         expect(@user.errors.full_messages).to include("Password パスワードは英数字混合で入力してください")
       end
       it "passwordが半角数字のみの場合登録できない" do
-        @user.password = "aaaaaa"
+        @user.password = "123456"
         @user.valid?
         expect(@user.errors.full_messages).to include("Password パスワードは英数字混合で入力してください")
       end
