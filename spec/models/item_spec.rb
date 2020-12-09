@@ -79,6 +79,31 @@ describe User do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is out of setting range")
       end
+      it "category_idが1では登録できない" do
+        @item.category_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category must be other than 1")
+      end
+      it "status_idが1では登録できない" do
+        @item.status_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status must be other than 1")
+      end
+      it "delivery_charge_idが1では登録できない" do
+        @item.delivery_charge_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery charge must be other than 1")
+      end
+      it "shipping_area_idが1では登録できない" do
+        @item.shipping_area_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping area must be other than 1")
+      end
+      it "duration_idが1では登録できない" do
+        @item.duration_id = "1"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Duration must be other than 1")
+      end
     end
   end
 end
