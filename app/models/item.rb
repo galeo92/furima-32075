@@ -18,11 +18,16 @@ class Item < ApplicationRecord
     validates :shipping_area_id
     validates :duration_id
     validates :image
-    validates :user
     validates :price, numericality: { only_integer: true, message: "is invalid. Input half-width characters." }
   end
 
-  validates :category_id, :status_id, :delivery_charge_id, :shipping_area_id, :duration_id, numericality: { other_than: 1 }
+  with_options numericality: { other_than: 1 } do
+    validates :category_id
+    validates :category_id
+    validates :delivery_charge_id
+    validates :shipping_area_id
+    validates :duration_id
+  end
 
   validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: "is out of setting range"}
 
