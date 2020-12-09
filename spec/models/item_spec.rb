@@ -104,6 +104,21 @@ describe User do
         @item.valid?
         expect(@item.errors.full_messages).to include("Duration must be other than 1")
       end
+      it "priceが空では登録できない" do
+        @item.price = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it "priceは半角英数混合では登録できない" do
+        @item.price = "abc123"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters.")
+      end
+      it "priceは半角英語だけでは登録できない" do
+        @item.price = "aaaaaa"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is invalid. Input half-width characters.")
+      end
     end
   end
 end
