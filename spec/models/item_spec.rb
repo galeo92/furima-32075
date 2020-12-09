@@ -1,0 +1,84 @@
+require 'rails_helper'
+describe User do
+  before do
+    @item = FactoryBot.build(:item)
+  end
+
+
+  describe '商品出品' do
+    context '商品出品がうまくいくとき' do
+      it "全項目記入すれば出品できる" do
+        expect(@item).to be_valid
+      end
+      it "priceが300円以上であれば登録できる" do
+        @item.price = "300"
+        expect(@item).to be_valid
+      end
+    end
+
+    context '商品出品がうまくいかないとき' do
+      it "imageが空だと登録できない" do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+      it "titleが空では登録できない" do
+        @item.title = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Title can't be blank")
+      end
+      it "explanationが空では登録できない" do
+        @item.explanation = ""
+        @item.valid?
+        
+        expect(@item.errors.full_messages).to include("Explanation can't be blank")
+      end
+      it "categoryが空では登録できない" do
+        @item.category_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank")
+      end
+      it "statusが空では登録できない" do
+        @item.status_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Status can't be blank")
+      end
+      it "delivery_chargeが空では登録できない" do
+        @item.delivery_charge_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Delivery charge can't be blank")
+      end
+      it "shipping_areaが空では登録できない" do
+        @item.shipping_area_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Shipping area can't be blank")
+      end
+      it "durationが空では登録できない" do
+        @item.duration_id = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Duration can't be blank")
+      end
+      it "priceが空では登録できない" do
+        @item.price = ""
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank")
+      end
+      it "priceが299では登録できない" do
+        @item.price = "299"
+        @item.valid?
+        
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
+      end
+      it "priceが10000000では登録できない" do
+        @item.price = "100000000"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
+      end
+      it "価格が全角では登録できない" do
+        @item.price = "100000000"
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is out of setting range")
+      end
+    end
+  end
+end
