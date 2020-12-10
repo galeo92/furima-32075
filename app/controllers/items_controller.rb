@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
    before_action :authenticate_user!, except:[:index]
 
   def index
-    # @items = Item.all 一覧機能で使う
+    @items = Item.all
   end
 
   def new
