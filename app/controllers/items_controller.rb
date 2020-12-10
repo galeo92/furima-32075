@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
   end
 
   def new
-    @item = Item.new
+    @item = Item.includes(:user).order("created_at DESC")
   end
 
   def create
