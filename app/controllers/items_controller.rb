@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
    before_action :authenticate_user!, except:[:index, :show]
    before_action :move_to_index, only:[:edit, :update]
+   before_action :set_tweet, only: [:edit, :show, :update]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -22,15 +23,12 @@ class ItemsController < ApplicationController
   end
 
   def show
-    @item = Item.find(params[:id])
   end
 
   def edit
-    @item = Item.find(params[:id])
   end
 
   def update
-    @item = Item.find(params[:id])
     if @item.update(item_params)
       redirect_to items_path(@item.id)
     else
@@ -50,6 +48,10 @@ class ItemsController < ApplicationController
     if current_user.id != @item.user.id
       redirect_to root_path
     end
+  end
+  
+  def set_tweet
+    @item = Item.find(params[:id])
   end
 end
 
