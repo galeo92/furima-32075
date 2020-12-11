@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
    before_action :authenticate_user!, except:[:index, :show]
    before_action :move_to_index, only:[:edit, :update]
-   before_action :set_tweet, only: [:edit, :show, :update]
+   before_action :set_item, only: [:edit, :show, :update]
 
   def index
     @items = Item.includes(:user).order("created_at DESC")
@@ -50,7 +50,7 @@ class ItemsController < ApplicationController
     end
   end
   
-  def set_tweet
+  def set_item
     @item = Item.find(params[:id])
   end
 end
