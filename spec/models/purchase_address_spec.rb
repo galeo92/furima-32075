@@ -14,9 +14,6 @@ describe PurchaseAddress do
       it "building_nameがなくでも保存ができる" do
         expect(@purchase_address).to be_valid
       end
-      it "building_nameがなくでも保存ができる" do
-        expect(@purchase_address).to be_valid
-      end
     end
 
 
