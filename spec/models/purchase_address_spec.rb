@@ -11,7 +11,7 @@ describe PurchaseAddress do
       it "全項目正しく記入すれば出品できる" do
         expect(@purchase_address).to be_valid
       end
-      it "priceとtokenがあれば保存ができること" do
+      it "building_nameがなくでも保存ができる" do
         expect(@purchase_address).to be_valid
       end
       it "building_nameがなくでも保存ができる" do
@@ -31,6 +31,11 @@ describe PurchaseAddress do
          @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Shipping area can't be blank")
       end
+      it "shipping_area_idが「1」では登録できない" do
+        @purchase_address.shipping_area_id = "1"
+        @purchase_address.valid?
+       expect(@purchase_address.errors.full_messages).to include("Shipping area を正しく入力して下さい")
+     end
       it "cityが空では登録できない" do
         @purchase_address.city = ""
         @purchase_address.valid?
@@ -66,11 +71,15 @@ describe PurchaseAddress do
         @purchase_address.valid?
         expect(@purchase_address.errors.full_messages).to include("Token can't be blank")
       end
-      it "user_id/item_idがないと登録ができない" do
+      it "user_idがないと登録ができない" do
         @purchase_address.user_id = nil
+        @purchase_address.valid?
+        expect(@purchase_address.errors.full_messages).to include("User can't be blank")
+      end
+      it "item_idがないと登録ができない" do
         @purchase_address.item_id = nil
         @purchase_address.valid?
-        expect(@purchase_address.errors.full_messages).to include("User can't be blank", "Item can't be blank")
+        expect(@purchase_address.errors.full_messages).to include("Item can't be blank")
       end
       it "phone_numberは英数混合では登録できない" do
         @purchase_address.phone_number = "090abcd1234"
