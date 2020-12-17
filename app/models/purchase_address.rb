@@ -10,6 +10,7 @@ class PurchaseAddress
     validates :city
     validates :address
     validates :phone_number, length: { maximum: 11 }
+    validates :phone_number, numericality: { only_integer: true, message: "を正しく入力して下さい"}
     validates :user_id
     validates :item_id
     validates :token
