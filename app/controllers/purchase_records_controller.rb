@@ -1,4 +1,4 @@
-class PurchaseRecordController < ApplicationController
+class PurchaseRecordsController < ApplicationController
 
   before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
@@ -13,7 +13,7 @@ class PurchaseRecordController < ApplicationController
 
   def create
     @purchase_address = PurchaseAddress.new(purchase_record_params)
-
+    binding.pry
     if @purchase_address.valid?
       pay_item
       @purchase_address.save
