@@ -12,8 +12,8 @@ describe PurchaseAddress do
         expect(@purchase_address).to be_valid
       end
       it "building_nameがなくでも保存ができる" do
-        expect(@purchase_address).to be_valid
         @purchase_address.building_name = nil
+        expect(@purchase_address).to be_valid
       end
     end
 
