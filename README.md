@@ -53,5 +53,5 @@
 | building_name   | string     |             |
 | phone_number    | integer    | null: false |
 | purchase_record | references | null: false, foreign_key: true |
-
+ 
 - belongs_to :purchase_record
