@@ -13,6 +13,7 @@ describe PurchaseAddress do
       end
       it "building_nameがなくでも保存ができる" do
         expect(@purchase_address).to be_valid
+        @purchase_address.building_name = nil
       end
     end
 
@@ -29,7 +30,7 @@ describe PurchaseAddress do
         expect(@purchase_address.errors.full_messages).to include("Shipping area can't be blank")
       end
       it "shipping_area_idが「1」では登録できない" do
-        @purchase_address.shipping_area_id = "1"
+        @purchase_address.shipping_area_id = 1
         @purchase_address.valid?
        expect(@purchase_address.errors.full_messages).to include("Shipping area を正しく入力して下さい")
      end

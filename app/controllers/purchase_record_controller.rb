@@ -1,6 +1,6 @@
 class PurchaseRecordController < ApplicationController
 
-  before_action :authenticate_user!, except:[:create]
+  before_action :authenticate_user!
   before_action :set_item, only: [:index, :create]
 
   def index
